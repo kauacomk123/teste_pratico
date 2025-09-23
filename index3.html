@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Comemore+</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa; /* fundo cinza claro */
+            color: #2f3640; /* cor do texto principal */
+        }
+
+        /* Header */
+        header {
+            background-color: #2f3640; /* azul escuro substituindo cinza */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header nav button {
+            background-color: #40739e; /* azul principal */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        header nav button:hover {
+            background-color: #487eb0;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #40739e; /* azul mais claro */
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .hero .btn {
+            background-color: #e1eaf6; /* branco azulado */
+            color: #2f3640;
+            border: none;
+            padding: 15px 30px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hero .btn:hover {
+            background-color: #d0d9ea;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Seção de Benefícios */
+        .benefits {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .benefits h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2f3640;
+        }
+
+        .benefits p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #57606f;
+        }
+
+        .benefits ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .benefits ul li {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #2f3640;
+        }
+
+        .benefits .create-list {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #40739e;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .benefits .create-list:hover {
+            background-color: #487eb0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Comemore+</h1>
+        <nav>
+            <a href="./Frontend/teladelogin.html">Entrar</a>
+            <a href="./Frontend/login_anfitriao.html">Crie seu evento</a>
+            <a href="./Frontend/login_convidado.html">Buscar evento</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Seu evento merece ser na Comemore+</h2>
+        <p>sinônimo de qualidade, segurança e sofisticação para seu evento.</p>
+         <div class="container">
+    <a href="./Frontend/login_anfitriao.html" class="btn">Criar Evento</a>
+    <a href="./Frontend/login_convidado.html" class="btn">Entrar em Evento</a>
+  </div>
+    </section>
+
+    <section class="benefits">
+        <h3>Lista de presentes online</h3>
+        <p>Sem complicação, sem itens repetidos. Receba presentes de forma prática, direto na sua conta, ou ofereça opções incríveis para qualquer ocasião.</p>
+        <p><strong>Por que usar nossa lista de presentes é a melhor escolha?</strong></p>
+        <ul>
+            <li>Menor tarifa do mercado, com taxa que diminui conforme você recebe mais presentes.</li>
+            <li>Transferências seguras e ilimitadas direto na sua conta bancária, sem intermediários.</li>
+            <li>Mais de 50 mil opções de presentes e listas prontas para todo tipo de evento: aniversários, casamentos, chás de bebê, formaturas e muito mais!</li>
+        </ul>
+        <a href="#" class="create-list">Criar lista</a>
+    </section>
+        
+    <section class="features">
+      <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Cadastro de Eventos</h3>
+                <p>Crie seu evento personalizado com data, localização e informações dos anfitriões. Defina uma senha para acesso dos convidados.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3>Lista de Presentes</h3>
+                <p>Adicione presentes com fotos, valores, categorias e formas de pagamento. Defina limites para cada item.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Convidados</h3>
+                <p>Acompanhe as escolhas de presentes, dados de contato e status de pagamento de todos os convidados.</p>
+            </div>
+        </section>
+</body>
+</html>

@@ -1,0 +1,37 @@
+ body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('casamento.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+    .container {
+      background: rgba(0,0,0,0.6);
+      padding: 40px;
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      background: #3498db;
+      color: white;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #2980b9;
+    }

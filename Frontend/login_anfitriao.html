@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/stylelogin.css">
+  <title>Login Anfitrião</title>
+  <style>
+    .error-message {
+      color: #ff0000;
+      background-color: #ffe6e6;
+      border: 1px solid #ff0000;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 15px;
+      text-align: center;
+      display: none;
+    }
+  </style>
+  <script>
+    function toggleForm(formId) {
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("cadastro-form").style.display = "none";
+      document.getElementById(formId).style.display = "block";
+      
+      // Esconder mensagem de erro ao alternar formulários
+      document.getElementById("login-error").style.display = "none";
+    }
+    
+    // Verificar se há parâmetro de erro na URL e exibir mensagem
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const error = urlParams.get('error');
+      
+      if (error === 'login_failed') {
+        document.getElementById("login-error").style.display = "block";
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- FORM LOGIN -->
+    <div id="login-form">
+      <h2>Login Anfitrião</h2>
+      <form action="../Backend/validar_anfitriao.php" method="POST">
+        <input type="text" name="cpf" placeholder="Digite seu CPF" required>
+        <input type="password" name="senha" placeholder="Digite sua senha" required>
+        <button type="submit">Entrar</button>
+      </form>
+      <div id="login-error" class="error-message">
+        CPF ou senha incorretos! Tente novamente.
+      </div>
+      <span class="toggle-link" onclick="toggleForm('cadastro-form')">Não tem conta? Cadastre-se</span>
+    </div>
+
+    <!-- FORM CADASTRO -->
+    <div id="cadastro-form" style="display: none;">
+      <h2>Cadastrar Anfitrião</h2>
+      <form action="../Backend/cadastra_anfitriao.php" method="POST">
+        <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+        <input type="text" name="cpf" placeholder="Digite seu CPF" required>
+        <input type="password" name="senha" placeholder="Crie uma senha" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <span class="toggle-link" onclick="toggleForm('login-form')">Já tem conta? Faça login</span>
+    </div>
+  </div>
+</body>
+</html>
