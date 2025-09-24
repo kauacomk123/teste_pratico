@@ -21,6 +21,12 @@ require_once("./conexao.php");
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        h2{
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
         body {
             background: #f5f7fb;
         }
@@ -60,6 +66,17 @@ require_once("./conexao.php");
         
         .sidebar-menu li a:hover, .sidebar-menu li a.active {
             background: #4361ee;
+        }
+
+        .form_cadastro{
+              padding: 20px 40px;
+    border-radius: 12px;
+    background: white;
+    max-width: 600px;
+    margin: 0 auto; /* centraliza apenas o form */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: block; /* não precisa de flex para o form */
+    text-align: left; /* melhor para formulários */
         }
         
         .main-content {
@@ -132,6 +149,7 @@ require_once("./conexao.php");
             object-fit: cover;
             border-radius: 5px;
         }
+        
     </style>
 </head>
 <body>
@@ -146,11 +164,11 @@ require_once("./conexao.php");
     <div class="container">
         <div class="sidebar">
             <ul class="sidebar-menu">
-                <li><a href="#" class="active" onclick="openTab('eventos')">📅 Meus Eventos</a></li>
-                <li><a href="#" onclick="openTab('criar-evento')">➕ Criar Evento</a></li>
-                <li><a href="#" onclick="openTab('presentes')">🎁 Gerenciar Presentes</a></li>
-                <li><a href="#" onclick="openTab('convidados')">👥 Convidados</a></li>
-                <li><a href="#" onclick="openTab('relatorios')">📊 Relatórios</a></li>
+                <li><a href="#" class="active" onclick="openTab('eventos')">Meus Eventos</a></li>
+                <li><a href="#" onclick="openTab('criar-evento')"> Criar Evento</a></li>
+                <li><a href="#" onclick="openTab('presentes')"> Gerenciar Presentes</a></li>
+                <li><a href="#" onclick="openTab('convidados')"> Convidados</a></li>
+                <li><a href="#" onclick="openTab('relatorios')">categorias e pagamento</a></li>
             </ul>
         </div>
         
@@ -159,37 +177,34 @@ require_once("./conexao.php");
             <div id="eventos" class="tab-content active">
                 <h2>Meus Eventos</h2>
                 <div class="grid" id="lista-eventos">
-                    <!-- Eventos serão carregados via JavaScript -->
+                    
                 </div>
             </div>
             
             <!-- TAB: CRIAR EVENTO -->
-            <div id="criar-evento" class="tab-content">
-                <h2>Criar Novo Evento</h2>
-                <form id="form-evento" class="card">
-                    <div class="form-group">
-                        <label>Nome do Evento:</label>
-                        <input type="text" name="nome_evento" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Data do Evento:</label>
-                        <input type="date" name="data_evento" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Localização:</label>
-                        <input type="text" name="localizacao" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Anfitrião(ões):</label>
-                        <input type="text" name="anfitrioes" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Senha do Evento (para convidados):</label>
-                        <input type="password" name="senha_evento" required>
-                    </div>
-                    <button type="submit" class="btn">Criar Evento</button>
-                </form>
-            </div>
+    
+        <div id="criar-evento" class="tab-content">
+            <h2>Criar Novo Evento</h2>
+    <form  class="form_cadastro" action="/cadastrar_evento.php" method="POST">
+        <label>Nome do evento:</label><br>
+        <input type="text" name="nome" required><br><br>
+
+        <label>Data do evento:</label><br>
+        <input type="date" name="data_evento" required><br><br>
+
+        <label>Localização:</label><br>
+        <input type="text" name="localizacao" required><br><br>
+
+        <label>Anfitrião(ões):</label><br>
+        <input type="text" name="anfitriao" required><br><br>
+
+        <label>Senha do evento:</label><br>
+        <input type="password" name="senha_evento" required><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+    </div>
+
             
             <!-- TAB: GERENCIAR PRESENTES -->
             <div id="presentes" class="tab-content">
@@ -202,56 +217,47 @@ require_once("./conexao.php");
             
             <!-- TAB: CRIAR PRESENTE -->
             <div id="criar-presente" class="tab-content">
-                <h2>Adicionar Presente</h2>
-                <form id="form-presente" class="card" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label>Nome do Presente:</label>
-                        <input type="text" name="nome_presente" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Preço:</label>
-                        <input type="number" step="0.01" name="preco" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Limite Máximo:</label>
-                        <input type="number" name="limite_maximo" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Categoria:</label>
-                        <select name="categoria" required>
-                            <option value="">Selecione...</option>
-                            <option value="Casa">Casa</option>
-                            <option value="Eletrodomésticos">Eletrodomésticos</option>
-                            <option value="Dinheiro">Dinheiro</option>
-                            <option value="Viagem">Viagem</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Imagem do Presente:</label>
-                        <input type="file" name="imagem" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label>Tipo de Pagamento:</label>
-                        <select name="tipo_pagamento" required>
-                            <option value="pix">PIX</option>
-                            <option value="link">Link de Pagamento</option>
-                            <option value="entrega">Entrega</option>
-                            <option value="cartao">Cartão de Crédito</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn">Adicionar Presente</button>
-                </form>
+                  <h1>Cadastro de Presente</h1>
+        <form action="../backend/cadastrar_presente.php" method="POST" enctype="multipart/form-data">
+        <label>Evento:</label><br>
+        <input type="number" name="evento_id" placeholder="ID do evento" required><br><br>
+
+        <label>Nome do presente:</label><br>
+        <input type="text" name="nome" required><br><br>
+
+        <label>Preço:</label><br>
+        <input type="number" step="0.01" name="preco" required><br><br>
+
+        <label>Limite máximo:</label><br>
+        <input type="number" name="limite_maximo" required><br><br>
+
+        <label>Categoria:</label><br>
+        <input type="text" name="categoria" required><br><br>
+
+        <label>Imagem do presente:</label><br>
+        <input type="file" name="imagem" accept="image/*" required><br><br>
+
+        <label>Tipo de pagamento:</label><br>
+        <select name="tipo_pagamento" required>
+            <option value="pix">Pix</option>
+            <option value="link">Link</option>
+            <option value="entrega">Entrega</option>
+            <option value="cartao">Cartão de Crédito</option>
+        </select><br><br>
+
+        <button type="submit">Cadastrar Presente</button>
+    </form>
             </div>
-            
-            <!-- TAB: CONVIDADOS -->
-            <div id="convidados" class="tab-content">
+           <!-- TAB: CONVIDADOS -->
+           <!-- <div id="convidados" class="tab-content">
                 <h2>Convidados e Presentes Escolhidos</h2>
                 <div id="lista-convidados">
-                    <!-- Lista de convidados será carregada via JavaScript -->
-                </div>
+                    Lista de convidados será carregada via JavaScript -->
+           <!--     </div>
             </div>
         </div>
-    </div>
+    </div>       -->
+      
 
     <script>
         // Função para alternar entre abas
@@ -275,6 +281,62 @@ require_once("./conexao.php");
             if (tabName === 'presentes') carregarPresentes();
             if (tabName === 'convidados') carregarConvidados();
         }
+
+        // Carregar eventos do banco
+function carregarEventos() {
+    fetch('carregar_eventos.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('lista-eventos').innerHTML = data;
+        });
+}
+function excluirEvento(id) {
+    if (confirm("Tem certeza que deseja excluir este evento?")) {
+        fetch("../backend/excluir_evento.php?id=" + id)
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === "success") {
+                    alert("Evento excluído com sucesso!");
+                    carregarEventos();
+                } else {
+                    alert("Erro: " + data);
+                }
+            });
+    }
+}
+
+function editarEvento(id) {
+    let nome = prompt("Novo nome do evento:");
+    let data_evento = prompt("Nova data do evento (YYYY-MM-DD):");
+    let localizacao = prompt("Nova localização:");
+    let anfitriao = prompt("Novo anfitrião:");
+
+    if (nome && data_evento && localizacao && anfitriao) {
+        let formData = new FormData();
+        formData.append("id", id);
+        formData.append("nome", nome);
+        formData.append("data_evento", data_evento);
+        formData.append("localizacao", localizacao);
+        formData.append("anfitriao", anfitriao);
+
+        fetch("../backend/editar_evento.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() === "success") {
+                alert("Evento atualizado com sucesso!");
+                carregarEventos();
+            } else {
+                alert("Erro: " + data);
+            }
+        });
+    }
+}
+
+// Carregar dados iniciais
+carregarEventos();
         
         // Carregar eventos do banco
         function carregarEventos() {
@@ -286,13 +348,14 @@ require_once("./conexao.php");
         }
         
         // Carregar presentes do banco
-        function carregarPresentes() {
-            fetch('carregar_presentes.php')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('lista-presentes').innerHTML = data;
-                });
-        }
+      function carregarPresentes() {
+    fetch('carregar_presentes.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('lista-presentes').innerHTML = data;
+        });
+}
+
         
         // Carregar convidados do banco
         function carregarConvidados() {

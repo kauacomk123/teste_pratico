@@ -25,7 +25,7 @@ if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminho)) {
 
     if ($conn->query($sql) === TRUE) {
         echo "Presente cadastrado com sucesso!";
-        echo "<br><a href='../frontend/dashborad_anfitriao.html'>Voltar</a>";
+        echo "<br><a href='painel_anfitriao.php'>Voltar</a>";
     } else {
         echo "Erro ao cadastrar presente: " . $conn->error;
     }
