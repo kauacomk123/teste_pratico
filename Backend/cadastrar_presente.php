@@ -2,12 +2,12 @@
 include "conexao.php";
 
 // Pegando dados do formulário
-$evento_id         = $_POST['evento_id'];
+$evento        = $_POST['evento_id'];
 $nome              = $_POST['nome'];
 $preco             = $_POST['preco'];
 $limite_maximo     = $_POST['limite_maximo'];
 $categoria_id      = $_POST['categoria']; // Agora é categoria_id
-$tipo_pagamento_id  = $_POST['tipo_pagamento']; // Agora é tpo_pagamento_id
+$tipo_pagamento_id = $_POST['tipo_pagamento']; // <--- ESTA LINHA PEGA O DADO
 
 // Upload da imagem
 $diretorio = "../uploads/";
@@ -21,7 +21,7 @@ $caminho = $diretorio . $nome_arquivo;
 if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminho)) {
     // Inserindo no banco com os nomes corretos das colunas
     $sql = "INSERT INTO presentes (evento_id, nome, preco, limite_maximo, categoria_id, imagem, tipo_pagamento_id) 
-            VALUES ('$evento_id', '$nome', '$preco', '$limite_maximo', '$categoria_id', '$nome_arquivo', '$tipo_pagamento_id')";
+            VALUES ('$evento', '$nome', '$preco', '$limite_maximo', '$categoria_id', '$nome_arquivo', '$tipo_pagamento_id')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Presente cadastrado com sucesso!";

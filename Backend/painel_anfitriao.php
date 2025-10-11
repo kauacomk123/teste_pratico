@@ -12,149 +12,12 @@ require_once("./conexao.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Frontend/css/dasgboard.css">
     <title>Dashboard - Comemore+</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        h2{
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        body {
-            background: #f5f7fb;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            min-height: 100vh;
-        }
-        
-        .sidebar {
-            background: #2d3748;
-            color: white;
-            padding: 20px 0;
-        }
-        
-        .sidebar-menu {
-            list-style: none;
-        }
-        
-        .sidebar-menu li a {
-            color: white;
-            text-decoration: none;
-            padding: 15px 20px;
-            display: block;
-            transition: 0.3s;
-        }
-        
-        .sidebar-menu li a:hover, .sidebar-menu li a.active {
-            background: #4361ee;
-        }
-
-        .form_cadastro{
-              padding: 20px 40px;
-    border-radius: 12px;
-    background: white;
-    max-width: 600px;
-    margin: 0 auto; /* centraliza apenas o form */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: block; /* não precisa de flex para o form */
-    text-align: left; /* melhor para formulários */
-        }
-        
-        .main-content {
-            padding: 20px;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        
-        .btn {
-            background: #4361ee;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        
-        .btn-success { background: #28a745; }
-        .btn-danger { background: #dc3545; }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .presente-item {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-        }
-        
-        .presente-item img {
-            max-width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        
-    </style>
 </head>
 <body>
     <div class="header">
-        <h1>Comemore+ - Dashboard do Anfitrião</h1>
+        <h1>Comemore+ Dashboard</h1>
         <div>
             <span>Olá, <?php echo $_SESSION['nome']; ?></span>
             <a href="../index3.html" style="color: white; margin-left: 20px;">Sair</a>
@@ -185,7 +48,7 @@ require_once("./conexao.php");
     
         <div id="criar-evento" class="tab-content">
             <h2>Criar Novo Evento</h2>
-    <form  class="form_cadastro" action="/cadastrar_evento.php" method="POST">
+    <form  class="form_cadastro" action="cadastra_evento.php" method="POST">
         <label>Nome do evento:</label><br>
         <input type="text" name="nome" required><br><br>
 
@@ -219,8 +82,19 @@ require_once("./conexao.php");
             <div id="criar-presente" class="tab-content">
                   <h1>Cadastro de Presente</h1>
         <form action="../backend/cadastrar_presente.php" method="POST" enctype="multipart/form-data">
-        <label>Evento:</label><br>
-        <input type="number" name="evento_id" placeholder="ID do evento" required><br><br>
+        
+            <label>Eventos:</label><br>
+        <select name="evento_id" required>
+            <?php
+            $sql = "SELECT id, nome FROM eventos ORDER BY nome";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="'.$row['id'].'">'.$row['nome'].'</option>';
+                }
+            }
+            ?>
+        </select><br><br>
 
         <label>Nome do presente:</label><br>
         <input type="text" name="nome" required><br><br>
@@ -231,18 +105,35 @@ require_once("./conexao.php");
         <label>Limite máximo:</label><br>
         <input type="number" name="limite_maximo" required><br><br>
 
-        <label>Categoria:</label><br>
-        <input type="text" name="categoria" required><br><br>
+
+         <label>tipo de categoria:</label><br>
+        <select name="categoria" required>
+            <?php
+            $sql = "SELECT id, nome FROM categorias ORDER BY nome";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="'.$row['id'].'">'.$row['nome'].'</option>';
+                }
+            }
+            ?>
+        </select><br><br>
 
         <label>Imagem do presente:</label><br>
         <input type="file" name="imagem" accept="image/*" required><br><br>
 
-        <label>Tipo de pagamento:</label><br>
+
+         <label>Tipo de pagamento:</label><br>
         <select name="tipo_pagamento" required>
-            <option value="pix">Pix</option>
-            <option value="link">Link</option>
-            <option value="entrega">Entrega</option>
-            <option value="cartao">Cartão de Crédito</option>
+            <?php
+            $sql_pag = "SELECT id, nome FROM formas_pagamento ORDER BY nome";
+            $result = $conn->query($sql_pag);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="'.$row['id'].'">'.$row['nome'].'</option>';
+                }
+            }
+            ?>
         </select><br><br>
 
         <button type="submit">Cadastrar Presente</button>
@@ -304,7 +195,7 @@ function excluirEvento(id) {
             });
     }
 }
-
+//funçao para editar o evento
 function editarEvento(id) {
     let nome = prompt("Novo nome do evento:");
     let data_evento = prompt("Nova data do evento (YYYY-MM-DD):");

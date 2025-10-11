@@ -37,9 +37,9 @@ include "conexao.php";
         <label>Tipo de pagamento:</label><br>
         <select name="tipo_pagamento" required>
             <?php
-            $sql_pag = "SELECT id, nome FROM tipo_pagamento ORDER BY nome";
-            $result_pag = $conn->query($sql_pag);
-            if ($result_pag->num_rows > 0) {
+            $sql_pag = "SELECT id, nome FROM formas_pagamento ORDER BY nome";
+            $result = $conn->query($sql_pag);
+            if ($result->num_rows > 0) {
                 while ($row = $result_pag->fetch_assoc()) {
                     echo '<option value="'.$row['id'].'">'.$row['nome'].'</option>';
                 }

@@ -16,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $nome, $cpf, $senha);
 
     if ($stmt->execute()) {
-        echo "✅ Cadastro realizado com sucesso! <a href='../Frontend/teladelogin'>Fazer login</a>";
+        echo " Cadastro realizado com sucesso! <a href='../Frontend/teladelogin'>Fazer login</a>";
     } else {
-        echo "❌ Erro ao cadastrar: " . $conn->error;
+        echo " Erro ao cadastrar: " . $conn->error;
     }
 
     $stmt->close();
